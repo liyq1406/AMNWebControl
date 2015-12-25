@@ -1,0 +1,3 @@
+﻿ligerui修改部分已经整理出来到 js/ligerui.my.js
+后面的引用文件都需要加上这个js，如果不方便，可以把这个文件手动复制到ligerui.all.js(ligerui.min.js)后面
+建议以后修改，只修改ligerui.my.js，这样升级只需要直接覆盖原来的文件即可

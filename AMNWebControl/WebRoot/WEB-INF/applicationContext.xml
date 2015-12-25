@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+		   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+		   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd"
+	default-autowire="byName">
+	
+	<bean id="dataSourceA3" class="org.logicalcobwebs.proxool.ProxoolDataSource" >
+		<property name="driver">
+			<value>net.sourceforge.jtds.jdbc.Driver</value>
+			<!-- <value>com.microsoft.sqlserver.jdbc.SQLServerDriver</value> -->
+		
+		</property>
+		<property name="driverUrl">
+<!-- 			<value>jdbc:jtds:sqlserver://10.1.1.11:1433/TestAMN</value> -->
+			<value>jdbc:jtds:sqlserver://10.1.1.11:1433/TestData</value>
+			<!-- <value>jdbc:jtds:sqlserver://10.0.0.9:1433/MasterDatabase2014</value>-->
+		</property>
+		<property name="user" value="sa" />
+		<property name="password" value="qwe123~" />
+		<!--  <property name="password" value="RUz4mRt?LuEy=@uG" />-->
+		<property name="alias" value="Pool_A3" />
+		  <property name="maximumActiveTime" value="20000000" />	
+		<property name="prototypeCount" value="0" />
+		<property name="maximumConnectionCount" value="200" />
+		<property name="minimumConnectionCount" value="8" />
+		<property name="simultaneousBuildThrottle" value="50" />
+		<property name="houseKeepingTestSql" value="select getdate()" />
+	</bean>
+	
+	<bean id="dataSourceS3" class="org.logicalcobwebs.proxool.ProxoolDataSource" >
+		<property name="driver">
+			<value>net.sourceforge.jtds.jdbc.Driver</value>
+		</property>
+		<property name="driverUrl">
+			<value>jdbc:jtds:sqlserver://10.1.1.11:1433/TestAMN</value>
+		</property>
+		<property name="user" value="sa" />
+		<property name="password" value="qwe123~" />
+		
+		<property name="alias" value="Pool_S3" />
+		<property name="maximumActiveTime" value="20000000" />
+		<property name="prototypeCount" value="0" />
+		<property name="maximumConnectionCount" value="200" />
+		<property name="minimumConnectionCount" value="8" />
+		<property name="simultaneousBuildThrottle" value="50" />
+		<property name="houseKeepingTestSql" value="select getdate()" />
+	</bean>	
+		
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSourceA3" />
+		</property>
+		<property name="configLocation">
+			<value>classpath:hibernate.cfg.xml</value>
+		</property>
+	</bean>
+	
+	<bean id="sessionFactory_PAD"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSourceS3" />
+		</property>
+	</bean>
+	<!--<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		 <property name="hibernateProperties">
+            <props>
+            	 <prop key="hibernate.proxool.pool_alias">datasourceA3x</prop>
+            	 <prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+            	 <prop key="hibernate.connection.provider_class">org.hibernate.connection.ProxoolConnectionProvider</prop> 
+            	 
+            </props>
+         </property>
+		<property name="configLocation">
+			<value>classpath:hibernate.cfg.xml</value>
+		</property>
+	</bean>
+	
+	
+	<bean id="sessionFactory_PAD"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		 <property name="hibernateProperties">
+            <props>
+            	 <prop key="hibernate.proxool.pool_alias">datasourceS3x</prop>
+            	 <prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+            	  <prop key="hibernate.connection.provider_class">org.hibernate.connection.ProxoolConnectionProvider</prop> 
+            	
+            </props>
+         </property>
+	</bean>
+	  -->
+	  
+	      <!--自定义任务-->    
+       <!--   <bean id="acceptmsg" class="com.amani.tools.AcceptMsg"></bean>  -->
+          
+        <!-- ScheduledTimerTask类是对TimerTask的包装器实现，这样你就可以为这个任务定义触发器信息。 -->  
+         <!--  <bean id="birthdayReminderTimerTask"  
+            class="org.springframework.scheduling.timer.ScheduledTimerTask">   -->  
+            <!-- 设置启动延迟 -->  
+             <!--<property name="delay">  
+                <value>10000</value>  
+            </property>  -->
+            <!-- 后续延迟 -->  
+             <!--<property name="period">  
+                <value>70000</value>  
+            </property>  -->
+            <!-- 指定触发器信息 -->  
+             <!--<property name="timerTask">  
+                <ref local="acceptmsg" />  
+            </property>  
+        </bean>  -->
+          
+        <!-- 使用TimerFactoryBean类，你可以让Spring使用配置创建触发器，并为一组指定的ScheduledTimerTask bean自动创建Timer实例。 -->  
+         <!--<bean id="timerFactory"  
+            class="org.springframework.scheduling.timer.TimerFactoryBean">  
+            <property name="scheduledTimerTasks">  
+                <list>  
+                    <ref local="birthdayReminderTimerTask" />               
+                </list>  
+            </property>          
+        </bean>  -->
+	
+	<bean id="transactionManager_PAD" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory_PAD"/>      
+    </bean>
+
+	<bean id="transactionInterceptor_PAD" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+
+        <property name="transactionManager" ref="transactionManager_PAD"/>
+    	<property name="transactionAttributes">
+
+		    <props>
+		 
+			    <prop key="post*">PROPAGATION_REQUIRED</prop>
+			    <prop key="afterpost">PROPAGATION_REQUIRED</prop>
+			    <prop key="delete">PROPAGATION_REQUIRED</prop>
+			    <prop key="update">PROPAGATION_REQUIRED</prop>
+			    <prop key="save*">PROPAGATION_REQUIRED</prop>
+		        
+		    </props>
+	    </property>
+	</bean>
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="transactionInterceptor"
+		class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<!--  事务拦截器bean需要依赖注入一个事务管理器 -->
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="transactionAttributes">
+			<!--  下面定义事务传播属性-->
+			<props>
+				
+				<prop key="post*">PROPAGATION_REQUIRED</prop>
+				<prop key="afterpost">PROPAGATION_REQUIRED</prop>
+				<prop key="delete">PROPAGATION_REQUIRED</prop>
+				<prop key="update">PROPAGATION_REQUIRED</prop>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+
+			</props>
+		</property>
+	</bean>
+    <!-- 定义BeanNameAutoProxyCreator-->
+    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+	    <!--  指定对满足哪些bean name的bean自动生成业务代理 -->
+	      <!--  下面是所有需要自动创建事务代理的bean-->
+        <!--  
+	    <property name="beanNames">
+            <list>
+            	
+ 		    </list>
+           
+	    </property>
+	    -->
+        <!--  下面定义BeanNameAutoProxyCreator所需的事务拦截器-->
+        <property name="interceptorNames">
+            <list>
+                <!-- 此处可增加其他新的Interceptor -->
+                <value>transactionInterceptor</value> 
+                <value>transactionInterceptor_PAD</value> 
+            </list>
+        </property>
+    </bean>
+
+	<!-- amn_PADDao	-->  
+	<bean id="amn_PADDao" class="com.amani.dao.AMN_PADDaoImp">
+		<property name="sessionFactory" ref="sessionFactory_PAD"></property>
+	</bean>
+ 
+ 	<bean id="amn_JDBCDao" class="com.amani.dao.AMN_JDBCDaoImp">
+		<property name="sessionFactory" ref="sessionFactory_PAD"></property>
+	</bean>
+
+	
+	<context:annotation-config />
+
+	<context:component-scan base-package="com.amani" />
+
+
+
+
+</beans>

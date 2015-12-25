@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="default" extends="json-default,jfreechart-default,jasperreports-default">
+<result-types>
+       <result-type name="chart" class="org.apache.struts2.dispatcher.ChartResult">
+        <param name="height">150</param>
+        <param name="width">200</param>
+       </result-type>
+
+       <result-type name="jasper" class="org.apache.struts2.views.jasperreports.JasperReportsResult"/>
+    </result-types>
+    
+    
+		<interceptors>
+			<interceptor name="login" class="com.amani.action.ValidateLoginInterceptor" />
+			<interceptor name="bean-scope" class="com.googlecode.scopeplugin.ScopeInterceptor" />
+			<interceptor-stack name="amaniStack">
+				<interceptor-ref name="login" />
+				<interceptor-ref name="bean-scope" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+
+		</interceptors>
+		<default-interceptor-ref name="amaniStack" />
+		 <global-results>
+            <result name="login" type="redirect">/Login.jsp</result>
+        </global-results>
+	</package>
+	
+	
+</struts>

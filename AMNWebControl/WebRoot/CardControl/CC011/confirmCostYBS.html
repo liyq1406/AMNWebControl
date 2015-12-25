@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<link href="../../common/ligerui/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+    <link href="../../common/ligerui/ligerUI/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
+     <script src="../../common/ligerui/jquery/jquery-1.5.2.min.js" type="text/javascript"></script> 
+	<script src="../../common/ligerui/ligerUI/js/ligerui.all.js"></script>
+	<script type="text/javascript" src="../../common/common.js"></script>
+</head>
+
+<body>
+<div  style="width:100%; float:left; clear:both; border:0px solid #ccc; overflow:auto;font-size:14px;  ">
+	<table style="font: 14px;line-height: 20px; text-align: inherit" cellspacing="0" cellpadding="0" width="100%">
+		<tr>
+			<td colspan="2">
+
+				<div id="buttonContainer">
+				    <a href="javascript:payOtheMode('1')"  class="button big gray">细胞更新NB </a>
+				    <a href="javascript:payOtheMode('2')"  class="button big blue">纯氧NB</a>
+				    <a href="javascript:payOtheMode('3')" class="button big green">无龄NB</a>
+				</div>
+			</td>
+		</tr>
+		
+	</table>	
+	<input type="hidden" id="curlbPayMode" name="curlbPayMode"/>
+	</div>
+<script language="JavaScript">
+	 	$(function ()
+   		{
+   			if(parent.document.getElementById("billflag").value=="0")
+     		{
+     			document.getElementById("curlbPayMode").value="1";
+            }
+     		else if(parent.document.getElementById("billflag").value=="1")
+     		{
+     			document.getElementById("curlbPayMode").value="4"
+     		}
+     		else
+     		{
+     			document.getElementById("curlbPayMode").value="A"
+     		}
+     		
+   		});
+   			
+    
+		    function payOtheMode(obj)
+   			{
+   				var curPayMode=document.getElementById("curlbPayMode").value;
+	   			var curRate=1;
+	   			var curPrice=0;
+	   			var csdisprice=98;
+	   			var vcostpricetype=0;
+	   			var curitemNo="";
+	   			var curitemname="";
+	   			if(obj==1)
+	   			{
+	   				curitemNo="4600010";
+	   				curitemname="细胞更新NB";
+	   			}
+	   			else if(obj==2)
+	   			{
+	   				curitemNo="4600011";
+	   				curitemname="纯氧NB";
+	   			}
+	   			else if(obj==3)
+	   			{
+	   				curitemNo="4600012";
+	   				curitemname="无龄NB";
+	   			}
+	   			var curNewRecord=parent.commoninfodivdetial.updateRow(parent.curRecord,{bcsinfotype:1,
+					 														 csitemno: curitemNo,
+																			 csitemname: curitemname,
+																			 csitemcount: 1,
+			     															 csunitprice: 98,
+			     															 csdisprice: 98,
+			     															 csitemamt:  98,
+			     															 csdiscount: 1,
+			     															 cspaymode: curPayMode,
+			     															 csproseqno:0,shareflag:0,costpricetype:1 });
+		       		parent.handPayList();
+		       		parent.shownewPayDialogmanager.close();
+	       	}
+ </script>
+
+<link rel="stylesheet" type="text/css" href="selfButton/buttons/buttons.css" />
+
+</body>
+</html>

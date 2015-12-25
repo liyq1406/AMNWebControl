@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<proxool-config>    
+    <proxool>    
+        <alias>datasourceA3x</alias>    
+<!--    <driver-url>jdbc:jtds:sqlserver://10.0.0.10:1433/AMNDATA;</driver-url>     -->
+        <driver-url>jdbc:jtds:sqlserver://10.1.1.11:1433/TestAMN</driver-url>    
+        <driver-class>net.sourceforge.jtds.jdbc.Driver</driver-class>    
+        <driver-properties>    
+            <property name="user" value="sa" />    
+            <property name="password" value="qwerasdf123~" />    
+        </driver-properties>    
+        <house-keeping-sleep-time>90000</house-keeping-sleep-time>    
+        <maximum-new-connections>20</maximum-new-connections>    
+        <prototype-count>5</prototype-count>    
+        <maximum-connection-count>1000</maximum-connection-count>    
+        <minimum-connection-count>10</minimum-connection-count>    
+    </proxool>    
+        
+   <!--  <proxool>    
+        <alias>datasourceS3x</alias>    
+         <driver-url>jdbc:jtds:sqlserver://10.0.0.10:1433/20130312;</driver-url>    
+        <driver-class>net.sourceforge.jtds.jdbc.Driver</driver-class>    
+        <driver-properties>    
+            <property name="user" value="sa" />    
+            <property name="password" value="qwerasdf123~" />    
+        </driver-properties>    
+        <house-keeping-sleep-time>90000</house-keeping-sleep-time>    
+        <maximum-new-connections>20</maximum-new-connections>    
+        <prototype-count>5</prototype-count>    
+        <maximum-connection-count>1000</maximum-connection-count>    
+        <minimum-connection-count>10</minimum-connection-count>    
+    </proxool> -->    
+</proxool-config>    

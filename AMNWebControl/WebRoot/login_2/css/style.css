@@ -1,0 +1,65 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	font-size: 12px;
+	font-family: "微软雅黑";
+	color: #FFF;
+	list-style-type: none;
+	border: 0px;
+}
+.clear {
+	_overflow: hidden;
+*height:0px;
+	clear: both;
+}
+
+body {
+	background-image: url(../images/di3.jpg);
+	background-repeat: no-repeat;
+	background-color: #FFFFFF;
+}
+.dl {
+	width: 960px;
+	padding-top: 60px;
+	margin-top: 0;
+	margin-right: auto;
+	margin-bottom: 0;
+	margin-left: auto;
+}
+.dl h1 { padding-top:78px; padding-left:78px;}
+.ym {
+	height: 288px;
+	position: relative;
+	background-image: url(../images/dl_071.png);
+	background-repeat: no-repeat;
+	background-position: center 80px;
+}
+.ym dl {
+	position: absolute;
+	left: 561px;
+	top: 107px;
+	_top: 107px;
+	width: 130px;
+	height: 130px;
+}
+.ym input { background:none; color:#FFFFFF; border:0px; width:150px;}
+.ym dl dd { margin-top:17px;_margin-top:16px;}
+.ym p {
+	color: 550;
+	position: absolute;
+	left: 370px;
+	top: 320px;
+}
+.ym span {
+	position: relative;
+	left: 550px;
+	top: 230px;
+	color: #FFF;
+	height: 28px;
+	width: 123px;
+}
+.dl .ym span a #submitbutton {
+	background-image: url(../images/ym_031.jpg);
+	height: 28px;
+	width: 123px;
+}

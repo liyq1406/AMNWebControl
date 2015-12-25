@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.amani.model.StaffHairdesignerinfo" table="staffhairdesignerinfo" lazy="false" >
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="native" />
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="name" length="50" />
+        </property>
+        <property name="staffopenid" type="java.lang.String">
+            <column name="staffopenid" length="25" />
+        </property>
+        <property name="imageurl" type="java.lang.String">
+            <column name="imageurl" length="120" />
+        </property>
+        <property name="content" type="java.lang.String">
+            <column name="content" length="120" />
+        </property>
+        <property name="ordernum" type="java.lang.Integer">
+            <column name="ordernum" length="4" />
+        </property>
+        <property name="praisenum" type="java.lang.Integer">
+            <column name="praisenum" length="4" />
+        </property>
+        <property name="lable" type="java.lang.String">
+            <column name="lable" length="20" />
+        </property>
+        <property name="label2" type="java.lang.String">
+            <column name="label2" length="20" />
+        </property>
+        <property name="auditstate" type="java.lang.String">
+            <column name="auditstate" length="10" />
+        </property>
+		<property name="manageno" type="java.lang.String">
+		   <column name="manageno" length="20" />
+		</property>
+		<property name="staffno" formula="(SELECT sf.staffno FROM Staffinfo sf WHERE sf.manageno=manageno)"/>
+		<property name="staffname" formula="(SELECT sf.staffname FROM Staffinfo sf WHERE sf.manageno=manageno)"/>
+		   
+    </class>
+</hibernate-mapping>

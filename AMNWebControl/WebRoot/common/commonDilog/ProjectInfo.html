@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>项目弹出框</title>
+    <link href="../ligerui/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+    <script src="../ligerui/json2.js" type="text/javascript"></script>
+    <script src="../ligerui/jquery/jquery-1.5.2.min.js" type="text/javascript"></script>
+   	<script src="../ligerui/ligerUI/js/ligerui.all.js"></script>
+  </head>
+  <body>
+  		<div  style="width:700px,height:98%; float:left; clear:both; border:1px solid #ccc; overflow:auto;font-size:12px;  ">
+			<table width="100%" border="0" cellspacing="1" cellpadding="0" style="font-size:12px;line-height:28px;" >
+				<tr>
+						<td width="10%">项目编号&nbsp;&nbsp;
+						</td>
+						<td>
+							<input type="text"name="strProjectId" id="strProjectId"    style="width:140;" />
+						</td>
+						<td width="10%">项目名称&nbsp;&nbsp;
+						</td>
+						<td>
+							<input type="text"name="strProjectName" id="strProjectName"  style="width:140;" />
+						</td>
+						<td></td>
+				</tr>
+				<tr>
+						<td width="10%">项目大类&nbsp;&nbsp;
+						</td>
+						<td>
+							<input type="text"name="strProjectType" id="strProjectType"    style="width:140;" />
+						</td>
+						<td width="10%">项目大类&nbsp;&nbsp;
+						</td>
+						<td>
+							<input type="text"name="strProjectRType" id="strProjectRType"    style="width:140;" />
+						</td>
+						<td ><div id="searchButton"></div></td>
+				</tr>
+				<tr>
+					<td colspan="5"><div id="commoninfodivmaster" style="margin:0; padding:0"></div></td>
+				</tr>
+			</table>
+		</div>
+							
+    	
+    	<script type="text/javascript">
+    	try
+    	{
+    	var commoninfodivmaster;
+    	var ProjecttypeData=JSON.parse(parent.parent.loadCommonControlDate("XMLB",0));
+        var Projecttypemanager = $("#strProjectType").ligerComboBox({ data: ProjecttypeData, isMultiSelect: false,valueFieldID: 'factstrProjectType',width:'140'});	
+        var ProjectRtypeData=JSON.parse(parent.parent.loadCommonControlDate("XMTJ",0));
+        var ProjectRtypemanager = $("#strProjectRType").ligerComboBox({ data: ProjectRtypeData, isMultiSelect: false,valueFieldID: 'factstrProjectRType',selectBoxHeight:400,width:'140'});	
+           	
+    	var CustomersData={Rows: parent.parent.lsProjectinfo,Total:parent.parent.lsProjectinfo.length};
+    	var ProjectWPDLData=JSON.parse(parent.parent.loadCommonControlDate_select("XMLB",0));
+   		var ProjectWPTJData=JSON.parse(parent.parent.loadCommonControlDate_select("XMTJ",0));
+   		}catch(e){alert(e.message);}
+    	 $(function (){
+    		  	try{
+	    		  		commoninfodivmaster=$("#commoninfodivmaster").ligerGrid({
+	                	columns: [
+	                		{ display: '项目编号', 	name: 'id.prjno', 	width:100,align: 'left'},
+		           			{ display: '项目名称', 	name: 'prjname', 		width:180,align: 'left'}, 
+		           			{ display: '标准价格', 	name: 'saleprice', 		width:60,align: 'left'}, 
+		           			{ display: '疗程次数', 	name: 'ysalecount', 		width:80,align: 'left'},
+		           			{ display: '疗程价格', 	name: 'ysaleprice', 		width:80,align: 'left'},
+		           			{ display: '项目大类', 	name: 'prjtype', 		width:80,align: 'left' ,
+			                	editor: { type: 'select', data: ProjectWPDLData, valueField: 'choose',selectBoxHeight:'220'},
+				            	render: function (item)
+				              	{
+				              		var lsZw=parent.parent.gainCommonInfoByCode("XMLB",0);
+				              		for(var i=0;i<lsZw.length;i++)
+									{
+										if(lsZw[i].bparentcodekey==item.prjtype)
+										{	
+											return lsZw[i].parentcodevalue;								
+									    }
+									}
+				                    return '';
+				                } 
+				            },
+		           			{ display: '统计分类', 	name: 'prjreporttype', 		width:90,align: 'left' ,
+			                    editor: { type: 'select', data: ProjectWPTJData, valueField: 'choose',selectBoxHeight:'220'},
+				            	render: function (item)
+				              	{
+				              		var lsZw=parent.parent.gainCommonInfoByCode("XMTJ",0);
+				              		for(var i=0;i<lsZw.length;i++)
+									{
+										if(lsZw[i].bparentcodekey==item.prjreporttype)
+										{	
+											return lsZw[i].parentcodevalue;								
+									    }
+									}
+				                    return '';
+				                } 
+				            }
+	               		],  pageSize:15,where : f_getWhere(),
+	                	data:CustomersData,      
+	                	width: '700',
+	                	height:'440',
+	                	clickToEdit: false,   enabledEdit: false,  
+	                	rownumbers: false,usePager: true,
+	                	onDblClickRow : function (data, rowindex, rowobj)
+	                	{
+	                		parent.document.getElementById(parent.projectdilogText).value=data.id.prjno;
+	                		//parent.validateProjectNo(parent.document.getElementById(parent.projectdilogText));
+	                		parent.document.getElementById(parent.projectdilogText).onchange();
+	                    	parent.projectdilog.close();
+	               	 	}
+	            	});  
+	            	}catch(e){alert(e.message);}
+	            	$("#searchButton").ligerButton(
+			        {
+			             text: '查询项目', width: 100,
+				         click: function ()
+				         {
+				             searchProjectInfo();
+				         }
+			        });
+		         
+	           	 
+    		  });
+		      function searchProjectInfo()
+		      {
+		         	commoninfodivmaster.options.data = $.extend(true, {}, CustomersData);
+            		commoninfodivmaster.loadData(f_getWhere());
+		      }
+		      function f_getWhere()
+		      {
+		            if (!commoninfodivmaster) return null;
+		            var clause = function (rowdata, rowindex)
+		            {
+		                var key1 = document.getElementById("strProjectId").value;
+		                var key2 = document.getElementById("strProjectName").value;
+		                var key3 = $("#factstrProjectType").val();
+		                var key4 = $("#factstrProjectRType").val();
+		                return    (checkNull(rowdata.id.prjno).indexOf(key1) > -1 || key1=="")
+		                       && (checkNull(rowdata.prjname).indexOf(key2) > -1 || key2=="")
+		                       && (checkNull(rowdata.prjtype).indexOf(key3) > -1 || key3=="")
+		                       && (checkNull(rowdata.prjreporttype).indexOf(key4) > -1 || key4=="") ;
+		            };
+		            return clause; 
+		      }
+		     function checkNull(strValue)
+			 {
+				if(strValue == null)
+				{
+					return "";
+				}
+				else
+				{
+					return strValue;
+				}
+			 }
+	         
+    	</script>
+  </body>
+</html>

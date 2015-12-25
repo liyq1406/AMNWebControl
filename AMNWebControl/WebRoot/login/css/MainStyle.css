@@ -1,0 +1,409 @@
+﻿html,body {
+			font-family: "微软雅黑", Verdana;
+			font-size: 12px;
+			font-weight: normal; 
+			color: #333333;
+			background: #DBDCCD url("../images/mainBg.jpg") repeat-x center top;
+			margin: 0px;
+			padding: 0px;
+			width:100%;
+			height:100%;
+			/*overflow:hidden;*/
+		}
+
+img,div,ol,ul,li,p,br {
+	font-family: "微软雅黑", Verdana, "宋体", "黑体";
+	font-size: 12px;
+	border: 0px;
+	outline: 0;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	}		
+
+img:A {
+	border: 0px;
+	outline: 0;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	}		
+
+
+
+/*===============各种链接样式定义================*/
+
+A:link /* 该属性用于定义链接文字静止格式*/ 
+{color:#333333; text-decoration: none}
+
+A:visited/* 该属性用于定义已经访问过的链接文字样式*/
+{color:#333333; text-decoration: none}
+
+A:hover /* 该属性用于定义鼠标移到链接文字上时样式*/
+{color:#CC0000; text-decoration: underline} 
+
+A:active/* 该属性用于定义点击链接文字样式*/
+{color:#CC0000; text-decoration:underline}
+
+
+/*===============各种字体样式定义================*/
+
+
+
+.TextInput {
+    float: left;
+    border: 1px solid #999999;
+    margin: 2px 2px 2px 2px;
+    padding: 0;
+    width: 200px;
+    height: 24px;
+    font-family: "微软雅黑", "宋体", Arial, Verdana;
+		font-size: 12px;
+		font-weight: normal; 
+		background:  url("#") no-repeat center;
+		color: #333;
+}
+
+
+
+.SearchTextInput {
+    float: left;
+    border: 1px solid #999999;
+    margin: 0px 0px 0px 0px;
+    padding: 0;
+    width: 80px;
+    height: 20px;
+    font-family: "微软雅黑", "宋体", Arial, Verdana;
+		font-size: 12px;
+		font-weight: normal; 
+		background:  url("#") no-repeat center;
+		color: #333;
+}
+
+.SelectTextInput {
+    float: left;
+    border: 1px solid #999999;
+    margin: 0px;
+    padding: 0;
+    width: 60px;
+    height: 20px;
+    font-family: "微软雅黑", "宋体", Arial, Verdana;
+		font-size: 12px;
+		font-weight: normal; 
+		background:  url("#") no-repeat center;
+		color: #333;
+}
+
+
+
+
+
+
+.LeftLine {
+    float: left;
+    border-left: 1px solid #ccc;
+    margin: 0px;
+    padding: 0px;
+		background:  url("#") no-repeat center;
+}
+
+
+.mainLine {
+    margin: 0px;
+    padding: 0px;
+    height: 10px;
+		background:  url("../images/mainLine.gif") repeat-x center center;
+}
+
+
+.mainZX {
+    margin: 0px;
+    padding: 0px;
+		background:  url("../images/mainDX.gif") repeat-y left center;
+}
+
+
+.MenuTXT {
+	font-family: "微软雅黑", "宋体";
+	font-size: 12px;
+	line-height: 100%;
+	width: 60px;
+	text-align: center;
+	color: #666;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	background:  url("../images/mainMenuLine.gif") no-repeat left center;
+	text-decoration: none;
+	
+}
+.MenuTXT A:visited
+{color: #333333; text-decoration:none;}
+.MenuTXT A:link
+{color: #333333; text-decoration:none}
+.MenuTXT A:active
+{color: #CC0000; text-decoration:none;}
+.MenuTXT A:hover
+{color: #CC0000; text-decoration:none;}
+
+
+.MenuHomeTXT {
+	font-family: "微软雅黑", "宋体";
+	font-size: 12px;
+	line-height: 100%;
+	width: 50px;
+	text-align: center;
+	color: #666;
+	padding-left: 20px;
+	padding-right: 10px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	margin: 0px;
+	background:  url("../images/mainMenuHomeIcon.gif") no-repeat left center;
+	text-decoration: none;
+	
+}
+.MenuHomeTXT A:visited
+{color: #333333; text-decoration:none}
+.MenuHomeTXT A:link
+{color: #333333; text-decoration:none}
+.MenuHomeTXT A:active
+{color: #CC0000; text-decoration:none}
+.MenuHomeTXT A:hover
+{color: #CC0000; text-decoration:none}
+
+
+
+.MenuMoreTXT {
+	font-family: "微软雅黑", "宋体";
+	font-size: 12px;
+	line-height: 100%;
+	width: 35px;
+	text-align: center;
+	color: #666;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	margin: 0px;
+	background:  url("../images/mainMenuArr.gif") no-repeat right center;
+	text-decoration: none;
+	
+}
+.MenuMoreTXT A:visited
+{color: #333333; text-decoration:none}
+.MenuMoreTXT A:link
+{color: #333333; text-decoration:none}
+.MenuMoreTXT A:active
+{color: #CC0000; text-decoration:none}
+.MenuMoreTXT A:hover
+{color: #CC0000; text-decoration:none}
+
+
+
+
+
+.MainDBT {
+	font-family: "微软雅黑", "宋体";
+	font-size: 12px;
+	line-height: 100%;
+	height 30px;
+	text-align: left;
+	color: #666;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	margin: 0px;
+	background:  url("../images/mainBtBg.gif") no-repeat left center;
+	text-decoration: none;
+	
+}
+.MainDBT A:visited
+{color: #333333; text-decoration:none}
+.MainDBT A:link
+{color: #333333; text-decoration:none}
+.MainDBT A:active
+{color: #CC0000; text-decoration:none}
+.MainDBT A:hover
+{color: #CC0000; text-decoration:none}
+
+
+.MainBtBqBg {
+	font-family: "微软雅黑", "宋体";
+	font-size: 12px;
+	line-height: 100%;
+	font-weight: bold;
+	height 22px;
+	text-align: center;
+	color: #333;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	margin: 0px;
+	background:  url("../images/mainBtBqBg.gif") no-repeat left center;
+	text-decoration: none;	
+}
+.MainDBT A:visited
+{color: #333333; text-decoration:none}
+.MainDBT A:link
+{color: #333333; text-decoration:none}
+.MainDBT A:active
+{color: #CC0000; text-decoration:none}
+.MainDBT A:hover
+{color: #CC0000; text-decoration:none}
+
+
+
+.MainInfoBt {
+	font-family: "微软雅黑", "宋体";
+	font-size: 12px;
+	line-height: 100%;
+	height 22px;
+	text-align: left;
+	color: #555;
+	padding-left: 20px;
+	padding-right: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	margin: 0px;
+	background:  url("#") no-repeat left center;
+	text-decoration: none;	
+}
+.MainDBT A:visited
+{color: #333333; text-decoration:none}
+.MainDBT A:link
+{color: #333333; text-decoration:none}
+.MainDBT A:active
+{color: #CC0000; text-decoration:none}
+.MainDBT A:hover
+{color: #CC0000; text-decoration:none}
+
+
+
+
+
+
+
+.bt30 {
+	font-family: "微软雅黑", "宋体";
+	font-size: 30px;
+	line-height: 120%;
+	font-weight: bold;
+	color: #666;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+	text-decoration: none;
+}
+.bt30 A:visited
+{color: #333333; text-decoration:}
+.bt30 A:link
+{color: #333333; text-decoration:underline}
+.bt30 A:active
+{color: #CC0000; text-decoration:none}
+.bt30 A:hover
+{color: #CC0000; text-decoration:none}
+
+
+
+
+.bt18 {
+	font-family: "微软雅黑", "宋体";
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 120%;
+	color: #CCC;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	text-align: left;
+	text-decoration: none;
+}
+.bt18 A:visited
+{color: #333333; text-decoration:underline}
+.bt18 A:link
+{color: #333333; text-decoration:underline}
+.bt18 A:active
+{color: #CC0000; text-decoration:none}
+.bt18 A:hover
+{color: #CC0000; text-decoration:none}
+
+
+
+.info {
+	font-family: "微软雅黑", "宋体";
+	font-size: 12px;
+	line-height: 180%;
+	color: #CCC;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	text-align: left
+	text-decoration: none;
+}
+.info A:visited
+{color: #333333; text-decoration:underline}
+.info A:link
+{color: #333333; text-decoration:underline}
+.info A:active
+{color: #CC0000; text-decoration:none}
+.info A:hover
+{color: #CC0000; text-decoration:none}
+
+
+
+.contxt {
+	font-family: "微软雅黑", "宋体";
+	font-size: 12px;
+	line-height: 130%;
+	text-align: left;
+	color: #999;
+	padding-left: 50px;
+	padding-right: 0px;
+	padding-top: 20px;
+	padding-bottom: 0px;
+	text-decoration: none;
+}
+.contxt A:visited
+{color: #333333; text-decoration:underline}
+.contxt A:link
+{color: #333333; text-decoration:underline}
+.contxt A:active
+{color: #CC0000; text-decoration:none}
+.contxt A:hover
+{color: #CC0000; text-decoration:none}
+
+
+
+
+
+.InfoTime {
+	font-family: Arial, Verdana;
+	font-size: 10px;
+	line-height: 120%;
+	color: #006699;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	text-align: justify;
+	text-decoration: none;
+}
+.InfoTime A:visited
+{color: #006699; text-decoration:none}
+.InfoTime A:link
+{color: #006699; text-decoration:underline}
+.InfoTime A:active
+{color: #CC0000; text-decoration:none}
+.InfoTime A:hover
+{color: #CC0000; text-decoration:none}
+
+
+

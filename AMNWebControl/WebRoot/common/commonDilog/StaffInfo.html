@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>员工弹出框</title>
+    <link href="../ligerui/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+    <script src="../ligerui/json2.js" type="text/javascript"></script>
+    <script src="../ligerui/jquery/jquery-1.5.2.min.js" type="text/javascript"></script>
+   	<script src="../ligerui/ligerUI/js/ligerui.all.js"></script>
+  </head>
+  <body>
+  		<div  style="width:700px,height:98%; float:left; clear:both; border:1px solid #ccc; overflow:auto;font-size:12px;  ">
+			<table width="100%" border="0" cellspacing="1" cellpadding="0" style="font-size:12px;line-height:28px;" >
+				<tr>
+						<td width="10%">员工编号&nbsp;&nbsp;
+						</td>
+						<td>
+							<input type="text"name="strStaffId" id="strStaffId"    style="width:140;" />
+						</td>
+						<td width="10%">员工名称&nbsp;&nbsp;
+						</td>
+						<td>
+							<input type="text"name="strStaffName" id="strStaffName"  style="width:140;" />
+						</td>
+						<td></td>
+				</tr>
+				<tr>
+						<td width="10%">员工部门&nbsp;&nbsp;
+						</td>
+						<td>
+							<input type="text"name="strStaffDepart" id="strStaffDepart"    style="width:140;" />
+						</td>
+						<td width="10%">员工职位&nbsp;&nbsp;
+						</td>
+						<td>
+							<input type="text"name="strStaffPostion" id="strStaffPostion"    style="width:140;" />
+						</td>
+						<td ><div id="searchButton"></div></td>
+				</tr>
+				<tr>
+					<td colspan="5"><div id="commoninfodivmaster" style="margin:0; padding:0"></div></td>
+				</tr>
+			</table>
+		</div>
+							
+    	
+    	<script type="text/javascript">
+    	var commoninfodivmaster;
+    	var StaffDepData=JSON.parse(parent.parent.loadCommonControlDate("BMZL",0));
+        var StaffDepmanager = $("#strStaffDepart").ligerComboBox({ data: StaffDepData, isMultiSelect: false,valueFieldID: 'factstrstrStaffDepart',selectBoxHeight:400,width:'140'});	
+        var StaffPostData=JSON.parse(parent.parent.loadCommonControlDate("GZGW",0));
+        var StaffPostmanager = $("#strStaffPostion").ligerComboBox({ data: StaffPostData, isMultiSelect: false,valueFieldID: 'factstrStaffPostion',selectBoxHeight:400,width:'140'});	
+           	
+    	var CustomersData={Rows: parent.parent.StaffInfo,Total:parent.parent.StaffInfo.length};
+    	var StaffBMZLData=JSON.parse(parent.parent.loadCommonControlDate_select("BMZL",0));
+   		var StaffGZGWData=JSON.parse(parent.parent.loadCommonControlDate_select("GZGW",0));
+    	 $(function (){
+    		  	try{
+	    		  		commoninfodivmaster=$("#commoninfodivmaster").ligerGrid({
+	                	columns: [
+	                		{ display: '员工编号', 	name: 'bstaffno', 	width:100,align: 'left'},
+		           			{ display: '员工名称', 	name: 'staffname', 		width:80,align: 'left'}, 
+		           			{ display: '内部编号', 	name: 'manageno', 		width:100,align: 'left'}, 
+		           			{ display: '指纹编号', 	name: 'fingerno', 		width:80,align: 'left'},
+		           			{ display: '员工部门', 	name: 'department', 		width:90,align: 'left' ,
+			                	editor: { type: 'select', data: StaffBMZLData, valueField: 'choose',selectBoxHeight:'220'},
+				            	render: function (item)
+				              	{
+				              		var lsZw=parent.parent.gainCommonInfoByCode("BMZL",0);
+				              		for(var i=0;i<lsZw.length;i++)
+									{
+										if(lsZw[i].bparentcodekey==item.department)
+										{	
+											return lsZw[i].parentcodevalue;								
+									    }
+									}
+				                    return '';
+				                } 
+				            },
+		           			{ display: '员工职位', 	name: 'position', 		width:90,align: 'left' ,
+			                    editor: { type: 'select', data: StaffGZGWData, valueField: 'choose',selectBoxHeight:'220'},
+				            	render: function (item)
+				              	{
+				              		var lsZw=parent.parent.gainCommonInfoByCode("GZGW",0);
+				              		for(var i=0;i<lsZw.length;i++)
+									{
+										if(lsZw[i].bparentcodekey==item.position)
+										{	
+											return lsZw[i].parentcodevalue;								
+									    }
+									}
+				                    return '';
+				                } 
+				            },
+				           { display: '员工状态', name: 'curstate',  width:60,align: 'left'  , 
+				                editor: { type: 'select', data: null, valueField: 'choose' },
+				                render: function (item)
+				                {
+				                    if (item.curstate == 1) return '未到职';
+				                    if (item.curstate == 2) return '已到职';
+				                      return '离职';
+				                }
+				         }
+	               		],  pageSize:15,where : f_getWhere(),
+	                	data:CustomersData,      
+	                	width: '700',
+	                	height:'440',
+	                	clickToEdit: false,   enabledEdit: false,  
+	                	rownumbers: false,usePager: true,
+	                	onDblClickRow : function (data, rowindex, rowobj)
+	                	{
+	                		parent.document.getElementById(parent.staffdilogText).value=data.bstaffno;
+	                		//parent.validateStaffNo(parent.document.getElementById(parent.staffdilogText));
+	                		parent.document.getElementById(parent.staffdilogText).onchange();
+	                    	parent.staffdilog.close();
+	               	 	}
+	            	});  
+	            	}catch(e){alert(e.message);}
+	            	$("#searchButton").ligerButton(
+			        {
+			             text: '查询员工', width: 100,
+				         click: function ()
+				         {
+				             searchStaffInfo();
+				         }
+			        });
+		         
+	           	 
+    		  });
+		      function searchStaffInfo()
+		      {
+		         	commoninfodivmaster.options.data = $.extend(true, {}, CustomersData);
+            		commoninfodivmaster.loadData(f_getWhere());
+		      }
+		      function f_getWhere()
+		      {
+		            if (!commoninfodivmaster) return null;
+		            var clause = function (rowdata, rowindex)
+		            {
+		                var key1 = document.getElementById("strStaffId").value;
+		                var key2 = document.getElementById("strStaffName").value;
+		                var key3 = $("#factstrstrStaffDepart").val();
+		                var key4 = $("#factstrStaffPostion").val();
+		                return    (rowdata.bstaffno.indexOf(key1) > -1 || key1=="")
+		                       && (rowdata.staffname.indexOf(key2) > -1 || key2=="")
+		                       && (rowdata.department.indexOf(key3) > -1 || key3=="")
+		                       && (rowdata.position.indexOf(key4) > -1 || key4=="") ;
+		            };
+		            return clause; 
+		      }
+	         
+    	</script>
+  </body>
+</html>

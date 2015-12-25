@@ -1,0 +1,110 @@
+@charset "utf-8";
+/* user  login css  */
+
+body, td, th {
+	font-size: 12px;
+	color: #333;
+}
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	background:url(../images/login_bg.jpg) repeat;
+}
+.login {
+	width:352px;
+	height:255px;
+	margin:10% auto 40px auto;
+	background: url(../images/login_bg.gif);
+	/* 设置阴影 */
+    -webkit-box-shadow:1px 1px 3px #ccc;
+	-moz-box-shadow:1px 1px 3px #ccc;
+	box-shadow:1px 1px 3px #ccc;
+}
+.clear {
+	clear:both;
+}
+.form {
+	margin-left:13px;
+	margin-right:auto;
+	margin-top:20px;
+	width:240px;
+	height:200px;
+	position:relative;
+	float:left;
+ *display:inline;
+}
+.form p {
+	width:218px;
+	height:30px;
+	border:0;
+	padding-left:40px;
+}
+.text-input {
+	border:1px solid #e5e5e8;
+	width:218px;
+	height:28px;
+	position:relative;
+	padding-left:38px;
+	line-height:28px;
+}
+.text-input:hover {
+	border:1px solid #6C0;
+}
+.shop-icon {
+	background:url(../images/form_shop_bg.jpg) no-repeat;
+	 
+}
+.username-icon {
+	background:url(../images/form_bg_username.jpg) no-repeat;
+	 
+}
+.passwd-icon {
+	background:url(../images/form_bg_pwd.jpg) no-repeat;
+	
+}
+.submit {
+	width:100px;
+	height:26px;
+	line-height:25px;
+	margin-right:30px;
+	float:right;
+	position:relative;
+	display:inline;
+}
+.button {
+	border-radius: 0.5em 0.5em 0.5em 0.5em;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+	display: inline-block;
+	font: 14px/100% Arial, Helvetica, sans-serif;
+	margin: 0 2px;
+	outline: medium none;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+	vertical-align: baseline;
+}
+.blue {
+	/* background: -moz-linear-gradient(center top , #00ADEE, #0078A5) repeat scroll 0 0 transparent;*/
+   background:url(../images/login_submit.png) no-repeat;
+	border: 0; /*1px solid #0076A3;*/
+	color: #D9EEF7;
+}
+.blue:hover, .blue.hover {
+	/* background: -moz-linear-gradient(center top , #0095CC, #00678E) repeat scroll 0 0 transparent;*/
+	 background:url(../images/login_submit_hover.png) center center  no-repeat;
+}
+.blue:active {
+	background: -moz-linear-gradient(center top, #0078A5, #00ADEE) repeat scroll 0 0 transparent;
+	color: #80BED6;
+}
+.bigrounded {
+	border-radius: 2em 2em 2em 2em;
+}
+.copyright {
+	position:relative;
+	text-align:center;
+	color:#666;
+}

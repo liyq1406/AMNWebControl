@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" />
+<link href="login_2/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<!--[if lte IE 6]>
+<script src="js/DD_belatedPNG_0.0.8a.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        DD_belatedPNG.fix('div, span, ul, img, li, h1, input, a');
+    </script>
+<![endif]-->
+
+
+
+<body>
+	<OBJECT id=locator height=0 width=0 classid=CLSID:76A64158-CB41-11D1-8B02-00600806D9B6 VIEWASTEXT></OBJECT>
+	<OBJECT id=foo height=0 width=0  classid=CLSID:75718C9A-F029-11d1-A1AC-00C04FB6C223></OBJECT>
+	<SCRIPT type="text/javascript">
+	function checkall(eid,compid,userparamname,userparampass,needvalidate,usbType)
+	{
+		var errMessage="";
+		var frmLogin = document.getElementById("frmLogin");	
+		var loginid = document.getElementById(userparamname);
+		var logincompid=document.getElementById(compid);
+		var userpassword = document.getElementById(userparampass);
+		if (logincompid&&logincompid.value=="") 
+		{
+			errMessage="请输入公司别！";
+			alert(errMessage);
+			logincompid.focus();
+			return false;
+		}
+		if (loginid&&loginid.value=="") 
+		{
+			errMessage="请输入用户名！";
+			alert(errMessage);
+			loginid.focus();
+			return false;
+		}
+		if (userpassword&&userpassword.value=="") 
+		{
+			errMessage="请输入密码！";
+			alert(errMessage);
+			userpassword.focus();
+			return false;
+		}
+	   frmLogin.submit();
+	}
+		
+   		var service = locator.ConnectServer();
+   		var MACAddr ;
+   		var IP ;
+   		service.Security_.ImpersonationLevel=3;
+   		service.InstancesOfAsync(foo, 'Win32_NetworkAdapterConfiguration');
+	</SCRIPT>
+	<script type="text/javascript" event=OnObjectReady(objObject,objAsyncContext) for=foo>
+   			if(objObject.IPEnabled != null && objObject.IPEnabled != "undefined" && objObject.IPEnabled == true)
+   			{
+    			if(objObject.MACAddress != null && objObject.MACAddress != "undefined")
+    			{
+    				MACAddr = objObject.MACAddress;
+    				
+    			}
+    		
+    			if(objObject.IPEnabled && objObject.IPAddress(0) != null && objObject.IPAddress(0) != "undefined")
+    			{
+    				IP = objObject.IPAddress(0);
+    			}
+    		}	
+		</script>
+		<SCRIPT type="text/javascript" event="OnCompleted(hResult,pErrorObject, pAsyncContext)" for=foo>
+			
+			document.getElementById("macAddr").value = unescape(MACAddr);
+			
+    		document.getElementById("ipAddr").value = unescape(IP);
+			//initLogin();
+		</SCRIPT>
+<div class="dl">
+	<h1><img src="login_2/images/dl_03.png"></h1>
+
+	<div class="ym">
+	<form id="frmLogin" name="frmLogin" method="post" action="VerifyLogin.action" onSubmit="return checkall('10904_1','compid','userid','pwd','0','1');" >
+	<dl>
+	<dd>
+		<input name="compid" id="compid" type="text" class="site_search_input" value="登录门店" onFocus="if (value =='登录门店'){value =''}" onBlur="if (value ==''){value='登录门店'}"/>
+	
+	</dd>
+	<dd>
+		<input name="userid" id="userid" type="text" class="site_search_input" value="用户名" onFocus="if (value =='用户名'){value =''}" onBlur="if (value ==''){value='用户名'}"/>
+	
+	</dd>
+	<dd>
+		<input maxlength="16" type="password" id="pwd" name="pwd" value=""  onfocus="check();"/>
+	</dd>
+	</dl> 
+	<span><a href="#">
+	<input type="submit"     class="button blue  submit" name="登陆" value="" id="submitbutton">
+
+    </a></span>
+    <p>Copyright 2013 Amnai All rights reserved.</p>
+	  <INPUT type=hidden name="logintype" value="1">
+	  <input id="licenseCode" name="licenseCode" type="hidden"/>
+      <input id="macAddr" name="macAddr" type="hidden"/>
+      <input id="ipAddr"  name="ipAddr"  type="hidden"/>
+	</form>
+  </div>
+</div>
+</body>
+</html>

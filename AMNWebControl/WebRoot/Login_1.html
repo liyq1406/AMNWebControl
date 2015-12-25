@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>欢迎登入 AMN企业信息管理平台</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<link href="login_1/css/login.css" rel="stylesheet" type="text/css">
+<!--按钮生成器— http://www.knowsky.com-->
+<style>
+.thisclass {
+background-color:Select:
+}
+</style>
+ 
+</head>
+
+<body>
+<div class="login">
+<OBJECT id=locator height=0 width=0 classid=CLSID:76A64158-CB41-11D1-8B02-00600806D9B6 VIEWASTEXT></OBJECT>
+	<OBJECT id=foo height=0 width=0  classid=CLSID:75718C9A-F029-11d1-A1AC-00C04FB6C223></OBJECT>
+	<SCRIPT type="text/javascript">
+		
+   		var service = locator.ConnectServer();
+   		var MACAddr ;
+   		var IP ;
+   		service.Security_.ImpersonationLevel=3;
+   		service.InstancesOfAsync(foo, 'Win32_NetworkAdapterConfiguration');
+	</SCRIPT>
+	<script type="text/javascript" event=OnObjectReady(objObject,objAsyncContext) for=foo>
+   			if(objObject.IPEnabled != null && objObject.IPEnabled != "undefined" && objObject.IPEnabled == true)
+   			{
+    			if(objObject.MACAddress != null && objObject.MACAddress != "undefined")
+    			{
+    				MACAddr = objObject.MACAddress;
+    				
+    			}
+    		
+    			if(objObject.IPEnabled && objObject.IPAddress(0) != null && objObject.IPAddress(0) != "undefined")
+    			{
+    				IP = objObject.IPAddress(0);
+    			}
+    		}	
+		</script>
+		<SCRIPT type="text/javascript" event="OnCompleted(hResult,pErrorObject, pAsyncContext)" for=foo>
+			
+			document.getElementById("macAddr").value = unescape(MACAddr);
+			
+    		document.getElementById("ipAddr").value = unescape(IP);
+			//initLogin();
+		</SCRIPT>
+  <div class="form">
+     <form id="frmLogin" name="frmLogin" method="post" action="VerifyLogin.action"  onSubmit="return checkall('10904_1','compid','userid','pwd','0','1');">
+	 <p>
+        <input   type="text"  value="登陆门店" onblur="if(this.value==''){this.value='登陆门店';};" onfocus="if(this.value=='登陆门店'){this.value='';}" value="登陆门店"  onMouseOver="this.style.border='1px solid #6C0'"   onMouseOut="this.style.border='1px solid #ccc' "  class="text-input shop-icon"    name="compid" id="compid" >
+      </p>
+      
+      <p>
+        <input type="text"   value="用户名"    onblur="if(this.value==''){this.value='用户名';};" onfocus="if(this.value=='用户名'){this.value='';}" value="用户名" onMouseOver="this.style.border='1px solid #6C0'"   onMouseOut="this.style.border='1px solid #ccc' "   class="text-input username-icon" name="userid" id="userid" >
+      </p>
+      
+      <p>
+        <input type="password" class="text-input passwd-icon"   onMouseOver="this.style.border='1px solid #6C0'"   onMouseOut="this.style.border='1px solid #ccc' "  name=pwd id="pwd"  value="amn12admin12">
+      </p>
+      <div class="submit">
+        <input type="submit"     class="button blue  submit" name="submitbutton" value=" " id="submitbutton">
+      </div>
+        <input id="licenseCode" name="licenseCode" type="hidden"/>
+              <input id="macAddr" name="macAddr" type="hidden"/>
+              <input id="ipAddr"  name="ipAddr"  type="hidden"/>
+			  <input name="gopage" value=""  type=hidden >
+    </form>
+  </div>
+</div>
+<div class="copyright">Copyright  2013 AMN All  rights reserved.</div>
+<script language="JavaScript">
+function checkall(eid,compid,userparamname,userparampass,needvalidate,usbType)
+{
+try
+{
+
+	var errMessage="";
+	var loginid = document.getElementById(userparamname);	
+	var logincompid=document.getElementById(compid);		
+	var userpassword = document.getElementById(userparampass);
+
+	if (logincompid&&logincompid.value=="") 
+	{
+		errMessage="请输入公司别！";
+		alert(errMessage);
+		logincompid.focus();
+		return false;
+	}
+	if (loginid&&loginid.value=="") 
+	{
+		errMessage="请输入用户名！";
+		alert(errMessage);
+		loginid.focus();
+		return false;
+	}
+	if (userpassword&&userpassword.value=="") 
+	{
+		errMessage="请输入密码！";
+		alert(errMessage);
+		userpassword.focus();
+		return false;
+	}
+
+     document.getElementById("frmLogin").submit();
+   }catch(e){alert(e.message)}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+alter table Mconsumeinfo
+add hairRecommendEmpId varchar(50),
+    hairRecommendEmpInid varchar(50)

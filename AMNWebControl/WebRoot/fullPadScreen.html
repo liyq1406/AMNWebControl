@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>AMN信息管理平台</title>
+</head>
+<script   language="javascript">  
+function   MyOpenWindow()  
+{  
+  var   myWidth=screen.availWidth;  
+  var   myHeight=screen.availHeight;  
+  //window.opener=null;  
+  window.open( 'interfaceAction.action' ,'','toolbar=no,status=no,resizable=yes,top=0,left=0,width='+myWidth+',height='+myHeight);  
+  //window.self.close(); 
+  Close();
+}  
+
+function Close()
+{  
+   //关闭当前窗口
+   window.open('','_parent','');
+   window.close(); 
+}
+
+</script> 
+<body onload="MyOpenWindow();">
+</body>
+</html>

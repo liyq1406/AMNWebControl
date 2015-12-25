@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+	<!--<servlet> <servlet-name>ServletConfigurator</servlet-name> <servlet-class> 
+		org.logicalcobwebs.proxool.configuration.ServletConfigurator </servlet-class> 
+		<init-param> <param-name>xmlFile</param-name> <param-value>WEB-INF/proxool.xml</param-value> 
+		</init-param> <load-on-startup>1</load-on-startup> </servlet> <servlet> <servlet-name>datasource_situation</servlet-name> 
+		<servlet-class> org.logicalcobwebs.proxool.admin.servlet.AdminServlet </servlet-class> 
+		</servlet> <servlet-mapping> <servlet-name>datasource_situation</servlet-name> 
+		<url-pattern>/datasource_situation</url-pattern> </servlet-mapping> -->
+	<icon>
+		<small-icon>/images/AMN.jpg</small-icon>
+		<large-icon>/images/AMN.jpg</large-icon>
+	</icon>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/applicationContext.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<!-- Spring 刷新Introspector防止内存泄露 -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+
+	<!-- 禁止同一帐号跨机登录 -->
+	<listener>
+		<display-name>recordSession</display-name>
+		<listener-class>com.amani.web.RecordSessionListener</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>com.amani.web.AMNServletContextListener</listener-class>
+	</listener>
+	<!-- <listener>  
+        <listener-class>  
+            org.springframework.web.context.request.RequestContextListener  
+        </listener-class>  
+	</listener>   -->
+	<session-config>
+		<session-timeout>15</session-timeout>
+	</session-config>
+	<filter>
+		<filter-name>struts2-cleanup</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ActionContextCleanUp</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts2-cleanup</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.FilterDispatcher</filter-class>
+	</filter>
+	<!-- <filter-mapping> <filter-name>struts2</filter-name> <url-pattern>/*</url-pattern> 
+		</filter-mapping> -->
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/struts/*</url-pattern>
+	</filter-mapping>
+
+
+
+	<!--<filter-mapping> <filter-name>struts2-dispatcher</filter-name> <url-pattern>*.action</url-pattern> 
+		</filter-mapping> <filter-mapping> <filter-name>struts2-dispatcher</filter-name> 
+		<url-pattern>*.jsp</url-pattern> </filter-mapping> -->
+	<filter>
+		<filter-name>Set Character Encoding</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>Set Character Encoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<servlet>
+		<servlet-name>LoadSendMsgInfo</servlet-name>
+		<servlet-class>com.amani.servlet.LoadSendMsgInfo</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>Admin</servlet-name>
+		<servlet-class>org.logicalcobwebs.proxool.admin.servlet.AdminServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>dwr</servlet-name>
+		<servlet-class>uk.ltd.getahead.dwr.DWRServlet</servlet-class>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+
+
+
+
+	<servlet>
+		<servlet-name>img</servlet-name>
+		<servlet-class>com.amani.web.AuthImg</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>img</servlet-name>
+		<url-pattern>/authImg</url-pattern>
+	</servlet-mapping>
+
+	<!-- 配置受保护域，只有Tomcat管理员才能察看连接池的信息 -->
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>proxool</web-resource-name>
+			<url-pattern>/admin</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>manager</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<login-config>
+		<auth-method>BASIC</auth-method>
+		<realm-name>proxool manager Application</realm-name>
+	</login-config>
+	<security-role>
+		<description>The role that is required to log in to the Manager Application</description>
+		<role-name>manager</role-name>
+	</security-role>
+	<error-page>
+		<error-code>401</error-code>
+		<location>/401.jsp</location>
+	</error-page>
+
+	<servlet>
+		<servlet-name>init</servlet-name>
+		<servlet-class>com.amani.web.initializatorServlet</servlet-class>
+		<init-param>
+			<param-name>service</param-name>
+			<param-value>gsmService</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet>
+		<servlet-name>display</servlet-name>
+		<servlet-class>org.jfree.chart.servlet.DisplayChart</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>LoadMsgInfoServlet</servlet-name>
+		<servlet-class>com.amani.servlet.LoadMsgInfoServlet</servlet-class>
+	</servlet>
+
+
+	<servlet>
+		<servlet-name>LoadMicroMessageServlet</servlet-name>
+		<servlet-class>com.amani.servlet.LoadMicroMessageServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>LoadMicroMessageServlet</servlet-name>
+		<url-pattern>/LoadMicroMessageServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>Admin</servlet-name>
+		<url-pattern>/admin</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>display</servlet-name>
+		<url-pattern>/DisplayChart</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>init</servlet-name>
+		<url-pattern>/init</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>LoadMsgInfoServlet</servlet-name>
+		<url-pattern>/LoadMsgInfoServlet</url-pattern>
+	</servlet-mapping>
+
+	
+	
+
+	<mime-mapping>
+		<extension>doc</extension>
+		<mime-type>application/doc</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>xls</extension>
+		<mime-type>application/xls</mime-type>
+	</mime-mapping>
+	<welcome-file-list>
+		<welcome-file>Login_3.jsp</welcome-file>
+		<!-- <welcome-file>fullScreen/index.jsp</welcome-file> -->
+	</welcome-file-list>
+
+	<jsp-config>
+		<jsp-property-group>
+			<description>        
+            Special property group for JSP Configuration  
+        </description>
+			<display-name>JSPConfiguration</display-name>
+			<url-pattern>*.frag</url-pattern>
+			<url-pattern>*.htm</url-pattern>
+			<url-pattern>*.html</url-pattern>
+			<el-ignored>true</el-ignored>
+			<page-encoding>UTF-8</page-encoding>
+			<scripting-invalid>false</scripting-invalid>
+			<include-prelude></include-prelude>
+			<include-coda></include-coda>
+
+		</jsp-property-group>
+	</jsp-config>
+</web-app>

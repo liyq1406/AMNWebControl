@@ -1,0 +1,22 @@
+*{
+	margin:0;
+	padding:0;
+}
+
+
+#buttonContainer{
+	background:url('../img/section_bg.png');
+	border:1px solid #F4F4F4;
+	overflow:hidden;
+	
+	padding:2px 0 5px 45px;
+	
+	-moz-box-shadow:0 0 10px #C4C4C4;
+	-webkit-box-shadow:0 0 10px #C4C4C4;
+	box-shadow:0 0 10px #C4C4C4;
+}
+
+#buttonContainer a{
+	float:left;
+	margin:15px 15px 0 0;
+}
